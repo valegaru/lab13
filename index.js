@@ -1,4 +1,3 @@
-// Clase Tarea para representar una tarea
 class Tarea {
     constructor(texto, estado) {
         this.texto = texto;
@@ -6,8 +5,6 @@ class Tarea {
     }
 }
 
-
-// Función para crear y mostrar una tarea en el tablero
 function crearTarea(texto, estado) {
     const tarjeta = document.createElement("div");
     tarjeta.className = "tarjeta";
@@ -30,7 +27,6 @@ function crearTarea(texto, estado) {
 
     const botonEstado = tarjeta.querySelector(".up");
     botonEstado.addEventListener("click", () => {
-        // Cambiar el estado de la tarea
         if (estado === "to-do") {
             estado = "doing";
         } else if (estado === "doing") {
@@ -43,7 +39,6 @@ function crearTarea(texto, estado) {
 
     const botonEstado1 = tarjeta.querySelector(".down");
     botonEstado1.addEventListener("click", () => {
-        // Cambiar el estado de la tarea
         if (estado === "done") {
             estado = "doing";
         } else if (estado === "doing") {
@@ -58,13 +53,11 @@ function crearTarea(texto, estado) {
 }
 
 
-// Función para mover una tarea de un estado a otro
 function moverTarea(tarjeta, nuevoEstado) {
     document.getElementById(nuevoEstado).appendChild(tarjeta);
 }
 
 
-// Función para agregar una tarea al tablero
 function agregarTarea() {
     const textoTarea = document.getElementById("textoTarea").value;
     if (textoTarea) {
@@ -75,7 +68,6 @@ function agregarTarea() {
 }
 
 
-// Función para guardar las tareas en el almacenamiento local
 function actualizarAlmacenamientoLocal() {
     const tareas = [];
     const elementosTarea = document.querySelectorAll(".tarjeta");
@@ -87,17 +79,12 @@ function actualizarAlmacenamientoLocal() {
     localStorage.setItem("tareas", JSON.stringify(tareas));
 }
 
-
-// Función para cargar tareas desde el almacenamiento local
 function cargarTareas() {
     const tareas = JSON.parse(localStorage.getItem("tareas")) || [];
     tareas.forEach((tarea) => crearTarea(tarea.texto, tarea.estado));
 }
 
 
-// Event listener para el botón "Añadir Tarea"
 document.getElementById("botonAgregarTarea").addEventListener("click", agregarTarea);
 
-
-// Cargar tareas al cargar la página
 cargarTareas();
